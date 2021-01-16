@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Aplikacija.LogIn.LogInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.LogIn"
+             xmlns:ff="clr-namespace:Domain;assembly=Domain"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="660" Loaded="OnFormLoad_Event">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1" Height="300" Width="300" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="ULOGUJ SE" Style="{StaticResource HeaderLabel}" Grid.Row="1" Grid.ColumnSpan="2" />
+
+            <Label Content="Korisnicko ime:" Style="{StaticResource BasicLabel}" Grid.Row="2"/>
+            <Label Content="Sifra:" Style="{StaticResource BasicLabel}" Grid.Row="3"/>
+
+            <TextBox x:Name="txtUserName" GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding FirstName}" Style="{StaticResource InputTextBox}" Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" HorizontalContentAlignment="Left"/>
+            <PasswordBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" ff:PasswordBoxAssistant.BindPassword="True" ff:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputPasswordBox}"  Grid.Row="3" Grid.Column="1" Margin="5,0,5,0"/>
+
+            <Button Click="OnLogInButtonClick_Event" Command="{Binding LogInCommand}" Content="Prijavi se" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LogInButton}"/>
+            <Button Click="OnQuitButtonClick_Event" Content="Napusti aplikaciju" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource LogInButton}"/>
+        </Grid>
+    </Grid>
+</UserControl>

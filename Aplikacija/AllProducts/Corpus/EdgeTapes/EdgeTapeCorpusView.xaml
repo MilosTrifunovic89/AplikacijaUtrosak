@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Aplikacija.AllProducts.Corpus.EdgeTapes.EdgeTapeCorpusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.AllProducts.Corpus.EdgeTapes"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+            <Label Content="KANTOVANJE" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Label Content="ODABERI DETALJ" Grid.ColumnSpan="3" Style="{StaticResource HeaderLabel}"/>
+
+            <ListView  ItemsSource="{Binding Details}" SelectedItem="{Binding SelectedDetail}" Margin="0,5,0,0">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Detalji">
+                        <GridViewColumn DisplayMemberBinding="{Binding DetailName}" Header="Naziv detalja"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Length}" Header="L (mm)"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Width}" Header="B (mm)"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Material.Thickness}" Header="D (mm)"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Material.MaterialName}" Header="Naziv materijala"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button Command="{Binding ResetDetail}" Style="{StaticResource Button}" Content="RESETUJ ODABRANI DETALJ"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <Label Content="ODABERI KANTOVANJE" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource HeaderLabel}"/>
+            </StackPanel>
+
+            <StackPanel Margin="5">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="1" Grid.Column="1" Source="/Assets/Common/Ploca.png" Height="110" Width="170" Margin="25"/>
+                    <Label Content="{Binding SelectedDetail.DetailName}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="{Binding SelectedDetail.Length}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Center"/>
+                    <Label Content="{Binding SelectedDetail.Width}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="140,0,0,0" VerticalAlignment="Center"/>
+
+                    <Image Margin="-24" Visibility="{Binding EdgeThree, Converter={StaticResource VisibilityConverter}}" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Source="/Assets/Common/ArrowRight.png" Height="30" Width="30"/>
+                    <Image Margin="-24" Visibility="{Binding EdgeFour, Converter={StaticResource VisibilityConverter}}"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Source="/Assets/Common/ArrowLeft.png" Height="30" Width="30"/>
+                    <Image Margin="-24" Visibility="{Binding EdgeTwo, Converter={StaticResource VisibilityConverter}}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/Assets/Common/ArrowDown.png" Height="30" Width="30"/>
+                    <Image Margin="-24" Visibility="{Binding EdgeOne, Converter={StaticResource VisibilityConverter}}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/Assets/Common/ArrowUp.png" Height="30" Width="30"/>
+                </Grid>
+
+
+                <Grid IsEnabled="{Binding IsEnabled}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox SelectedItem="{Binding SelectedEdgeTapeOne}" ItemsSource="{Binding AllEdgeTapes}" Grid.Column="0" Margin="3"/>
+                    <Button IsEnabled="{Binding IsEnabledOne}" Command="{Binding ResetCommandOne}" Style="{StaticResource ResetButton}" Content="RESET" Grid.Row="1"/>
+
+                    <ComboBox SelectedItem="{Binding SelectedEdgeTapeTwo}" ItemsSource="{Binding AllEdgeTapes}" Grid.Column="1" Margin="3"/>
+                    <Button IsEnabled="{Binding IsEnabledTwo}" Command="{Binding ResetCommandTwo}" Style="{StaticResource ResetButton}" Content="RESET" Grid.Row="1" Grid.Column="1"/>
+
+                    <ComboBox SelectedItem="{Binding SelectedEdgeTapeThree}" ItemsSource="{Binding AllEdgeTapes}" Grid.Row="2" Grid.Column="0" Margin="3"/>
+                    <Button IsEnabled="{Binding IsEnabledThree}" Command="{Binding ResetCommandThree}" Style="{StaticResource ResetButton}" Content="RESET" Grid.Row="3" Grid.Column="0"/>
+
+                    <ComboBox SelectedItem="{Binding SelectedEdgeTapeFour}" ItemsSource="{Binding AllEdgeTapes}" Grid.Row="2" Grid.Column="2" Margin="3"/>
+                    <Button IsEnabled="{Binding IsEnabledFour}" Command="{Binding ResetCommandFour}" Style="{StaticResource ResetButton}" Content="RESET" Grid.Row="3" Grid.Column="1"/>
+
+                </Grid>
+                <StackPanel IsEnabled="{Binding IsEnabled}">
+                    <Button Click="OnSetEdgeTapeCommand_Event" Style="{StaticResource Button}" Content="PRIMENI"/>
+                    <Button Click="OnDeleteEdgeTapesFromDetail_Event" Style="{StaticResource Button}" Content="RESETUJ DETALJ"/>
+                    <Button Click="OnDeleteAllEdgeTapesFromElement_Event" Command="{Binding ResetAll}" Style="{StaticResource Button}" Content="RESETUJ SVE"/>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+
+        <Button Command="{Binding GoBackCommand}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" Content="NAZAD" Style="{StaticResource Button}"/>
+    </Grid>
+</UserControl>

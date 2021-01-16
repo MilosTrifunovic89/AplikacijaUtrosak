@@ -1,0 +1,103 @@
+﻿<Window x:Class="Aplikacija.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Aplikacija"
+        xmlns:common="clr-namespace:Aplikacija.Common"
+        xmlns:home="clr-namespace:Aplikacija.Home"
+        xmlns:middle="clr-namespace:Aplikacija.MiddleWindow"
+        xmlns:table="clr-namespace:Aplikacija.AllProducts.Table.Main"   
+        xmlns:fittingsTable ="clr-namespace:Aplikacija.AllProducts.Table.Fittings"
+        xmlns:changeMaterialTable="clr-namespace:Aplikacija.AllProducts.Table.ChangeMaterial"
+        xmlns:edgeTapeTable="clr-namespace:Aplikacija.AllProducts.Table.EdgeTapes"
+        xmlns:corpus="clr-namespace:Aplikacija.AllProducts.Corpus.Main"
+        xmlns:changeMaterialCorpus="clr-namespace:Aplikacija.AllProducts.Corpus.ChangeMaterial"
+        xmlns:fittingsCorpus="clr-namespace:Aplikacija.AllProducts.Corpus.Fittings"
+        xmlns:edgeTapeCorpus="clr-namespace:Aplikacija.AllProducts.Corpus.EdgeTapes"
+        xmlns:addDetail="clr-namespace:Aplikacija.AllProducts.Corpus.Details"
+        xmlns:customer="clr-namespace:Aplikacija.Offer.Customer"
+        xmlns:offer="clr-namespace:Aplikacija.Offer.Main"
+        xmlns:articlesInOffer="clr-namespace:Aplikacija.Offer.ArticlesInOffer"
+        xmlns:logIn="clr-namespace:Aplikacija.LogIn"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="660" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <common:AutoDataTemplateSelector x:Key="AutoDataTemplateSelector" />
+    </Window.Resources>
+    <Grid>
+        <ContentControl x:Name="mainContent"
+                        ContentTemplateSelector="{StaticResource AutoDataTemplateSelector}"
+                        Content="{Binding CurrentViewModel}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        >
+            <ContentControl.Resources>
+
+                <DataTemplate x:Key="HomeViewModel">
+                    <home:HomeView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="TableViewModel">
+                    <table:TableView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="MiddleViewModel">
+                    <middle:MiddleView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="FittingsTableViewModel">
+                    <fittingsTable:FittingsTableView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="ChangeMaterialTableViewModel">
+                    <changeMaterialTable:ChangeMaterialTableView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="EdgeTapeTableViewModel">
+                    <edgeTapeTable:EdgeTapeTableView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="LogInViewModel">
+                    <logIn:LogInView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="CorpusViewModel">
+                    <corpus:CorpusView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="ChangeMaterialCorpusViewModel">
+                    <changeMaterialCorpus:ChangeMaterialCorpusView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="FittingsCorpusViewModel">
+                    <fittingsCorpus:FittingsCorpusView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="EdgeTapeCorpusViewModel">
+                    <edgeTapeCorpus:EdgeTapeCorpusView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="AddDetailViewModel">
+                    <addDetail:AddDetailView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="CustomerViewModel">
+                    <customer:CustomerView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="OfferViewModel">
+                    <offer:OfferView/>
+                </DataTemplate>
+
+                <DataTemplate x:Key="ArticlesInOfferViewModel">
+                    <articlesInOffer:ArticlesInOfferView/>
+                </DataTemplate>
+
+            </ContentControl.Resources>
+
+        </ContentControl>
+    </Grid>
+</Window>

@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Aplikacija.Offer.ArticlesInOffer.ArticlesInOfferView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.Offer.ArticlesInOffer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+            <Label Content="ARTIKLI U PONUDI" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+        <ListView Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding OfferProducts}" SelectedItem="{Binding SelectedElement}" Margin="0,5,0,0" IsEnabled="{Binding IsSelected}"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Artikli">
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductID}" Header="Sifra" />
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductName}" Header="Naziv"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Dimension}" Header="Dimenzije"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Cena"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Quantity}" Header="Kolicina"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Opis"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label VerticalAlignment="Top" Content="Opis:" Style="{StaticResource BasicLabel}" Grid.Row="1"/>
+            <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Description}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" IsEnabled="{Binding IsSelected}"/>
+
+            <Label Grid.Row="3" Content="Broj komada:" Style="{StaticResource BasicLabel}"/>
+            <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Quantity}" Grid.Column="1" Grid.Row="3" Style="{StaticResource InputTextBox}" IsEnabled="{Binding IsSelected}"/>
+
+
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="IZMENI" Command="{Binding UpdateCommand}" Style="{StaticResource Button}"/>
+            <Button Grid.Column="1" Content="OBRISI" Command="{Binding DeleteCommand}" Style="{StaticResource Button}"/>
+            <Button Grid.Column="2" IsEnabled="{Binding IsEmpty}" Command="{Binding AcceptCommand}" Content="OK" Style="{StaticResource Button}"/>
+            <Button Grid.Column="3" Command="{Binding GoBackCommand}" Content="DOVRSI PONUDU" Style="{StaticResource Button}"/>
+
+        </Grid>
+    </Grid>
+</UserControl>

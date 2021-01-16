@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Aplikacija.MiddleWindow.MiddleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.MiddleWindow"
+             mc:Ignorable="d"
+             d:DesignHeight="660" d:DesignWidth="600">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Label Style="{StaticResource HeaderLabel}" Content="RACUNANJE UTROSAKA ZA"/>
+            <Label Content="{Binding Header}" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+        <Label Content="ODABERI VRSTU MATERIJALA" Style="{StaticResource HeaderLabel}" FontSize="20" Grid.Row="1"/>
+        
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            
+
+            <Viewbox Height="70" HorizontalAlignment="Left">
+                <RadioButton Command="{Binding PlyWoodCommand}" GroupName="rbChoseMaterial" Margin="15" Content="Iverica" />
+            </Viewbox>
+
+            <Viewbox Height="70" HorizontalAlignment="Left">
+                <RadioButton Command="{Binding MDFCpmmand}" GroupName="rbChoseMaterial" Content="MDF" Margin="15" />
+            </Viewbox>
+
+            <!--<Viewbox Height="70" HorizontalAlignment="Left">
+                <RadioButton GroupName="rbChoseMaterial" Content="Lesonit" Margin="15" />
+            </Viewbox>-->
+
+            
+        </StackPanel>
+        <Label Content="ODABERI MATERIJAL" Style="{StaticResource HeaderLabel}" FontSize="20" Grid.Row="1" Grid.Column="1"/>
+        
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsEnabled}">
+            <ComboBox SelectedItem="{Binding SelectedMaterial}" ItemsSource="{Binding AllMaterials}" IsEditable="False" FontSize="20" Margin="5" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Button Content="IZABERI" Style="{StaticResource Button}" Click="OnMaterialChoseClick_Event"/>
+            <Button Content="DALJE" Style="{StaticResource Button}" Click="OnNextClick_Event"/>
+            <Button Command="{Binding GoBackCommand}" Content="NAZAD" Style="{StaticResource Button}"/>
+        </StackPanel>
+        <!--Command="{Binding NextCommand}"-->
+    </Grid>
+</UserControl>

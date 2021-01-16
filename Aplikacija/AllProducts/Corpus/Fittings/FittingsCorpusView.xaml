@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Aplikacija.AllProducts.Corpus.Fittings.FittingsCorpusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.AllProducts.Corpus.Fittings"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="600">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.ColumnSpan="2">
+            <Label Content="DODAVANJE OKOVA" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="1">
+            <Label Content="ODABERI OKOV" Grid.ColumnSpan="3" Style="{StaticResource HeaderLabel}"/>
+            <Label Content="Pretrazi po reci:" Style="{StaticResource BasicLabel}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBox Style="{StaticResource InputTextBox}" Grid.Row="1" Width="230"/>
+                <Button Content="Trazi" Style="{StaticResource Button}" Grid.Row="1" Grid.Column="1"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="BROJ KOMADA" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource HeaderLabel}"/>
+            <Label Content=" " Style="{StaticResource BasicLabel}"/>
+            <StackPanel Orientation="Horizontal" IsEnabled="{Binding IsEnabledInsert}">
+                <Label Content="Br komada:" Style="{StaticResource BasicLabel}" Grid.Column="0" Grid.Row="1"/>
+                <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Number}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="1" Width="160" Margin="10,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button IsEnabled="{Binding IsEnabledInsert}" Click="OnButtonClickInsertFitting_Click" Content="UBACI OKOV" Style="{StaticResource Button}"/>
+        </StackPanel>
+        
+        <!--KeyUp="OnPressEnter_Event"-->
+        
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <Button IsEnabled="{Binding IsEnabledRemove}" Click="OnButtonClickRemoveFitting_Click" Content="UKLONI OKOV" Style="{StaticResource Button}"/>
+        </StackPanel>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding AllFittings}" SelectedItem="{Binding SelectedFitting}" Margin="0,5,0,0">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Elementi">
+                    <GridViewColumn DisplayMemberBinding="{Binding FittingName}" Header="Naziv okova"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding UnitOfMeasure}" Header="JM"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3">
+            <Label Content="Okov u elementu:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        </StackPanel>
+
+        <ListView Grid.Row="4" ItemsSource="{Binding FittingsInElement}" SelectedItem="{Binding SelectedFittingToRemove}" Margin="0,5,0,0">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Elementi">
+                    <GridViewColumn DisplayMemberBinding="{Binding FittingName}" Header="Naziv okova"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding UnitOfMeasure}" Header="JM"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Quantity}" Header="Kolicina"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Command="{Binding GoBackCommand}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="5" Content="NAZAD" Style="{StaticResource Button}"/>
+    </Grid>
+</UserControl>

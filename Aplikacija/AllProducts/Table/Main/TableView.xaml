@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="Aplikacija.AllProducts.Table.Main.TableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.AllProducts.Table.Main"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="600">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+            <Label Content="RACUNANJE UTROSAKA ZA RADNI STO" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="UNESI DIMENZIJE STOLA (mm)" Grid.ColumnSpan="3" Style="{StaticResource HeaderLabel}"/>
+
+
+            <Label Content="Odaberi sifru:" Grid.Row="1" Style="{StaticResource BasicLabel}"/>
+            <Label Content="Odaberi konstrukciju:" Grid.Row="2" Style="{StaticResource BasicLabel}"/>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <RadioButton Command="{Binding GetMaxRegilarID}" Content="Obicna sifra" VerticalContentAlignment="Center" IsChecked="{Binding IsCheckedRegular}"/>
+                <RadioButton Command="{Binding GetMaxTenderID}" Content="Tender" VerticalContentAlignment="Center" IsChecked="{Binding IsCheckedTender}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" IsEnabled="{Binding IsEnabled}">
+                <RadioButton Command="{Binding ChoseMetalConstruction}" Content="Metalna" VerticalContentAlignment="Center" IsChecked="{Binding MetalConstruction}"/>
+                <RadioButton Command="{Binding ChoseWoodenConstruction}" Content="Drvena" VerticalContentAlignment="Center" IsChecked="{Binding WoodenConstruction}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="3" IsEnabled="{Binding IsEnabled}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.8*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Sifra elementa:" Grid.Row="0" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="Naziv:" Grid.Row="1" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="Sirina:" Grid.Row="2" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="Dubina:" Grid.Row="3" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="Visina:" Grid.Row="4" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="Sirina vezaca:" Grid.Row="5" Style="{StaticResource BasicLabel}"/>
+
+                    <Label Style="{StaticResource BasicLabel}" Content="{Binding ID}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
+                    <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding TableName}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding MetalConstructionIsEnabled}"/>
+                    <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Width}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="2" IsEnabled="{Binding MetalConstructionIsEnabled}"/>
+                    <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Depth}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="3" IsEnabled="{Binding MetalConstructionIsEnabled}"/>
+                    <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding Height}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="4" IsEnabled="{Binding MetalConstructionIsEnabled}"/>
+                    <TextBox GotMouseCapture="OnFocus_Event" GotKeyboardFocus="OnFocus_Event" Text="{Binding BinderWidth}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="5" IsEnabled="{Binding WoodenConstructionIsEnabled}"/>
+
+                    <Label Content="mm" Grid.Column="2" Grid.Row="2" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="mm" Grid.Column="2" Grid.Row="3" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="mm" Grid.Column="2" Grid.Row="4" Style="{StaticResource BasicLabel}"/>
+                    <Label Content="mm" Grid.Column="2" Grid.Row="5" Style="{StaticResource BasicLabel}" />
+                    <Button Click="OnButtonClickCreateTable_Event" IsEnabled="{Binding IsEnableButton}" Content="KREIRAJ STO" Style="{StaticResource Button}" Grid.ColumnSpan="3"  Grid.Row="6"/>
+                </Grid>
+            </StackPanel>
+
+            <!--Command="{Binding CreateCommand}"-->
+
+
+            <Label Content="Marza:" Style="{StaticResource BasicLabel}" Grid.Row="5"/>
+            <TextBox Text="{Binding Marza}" Style="{StaticResource InputTextBox}" Grid.Row="5" Grid.Column="1" IsEnabled="{Binding IsEnabledMarza}"/>
+            <Label Content="X" Grid.Column="2" Grid.Row="5" Style="{StaticResource BasicLabel}"/>
+
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel>
+                <Label Content="UREDI STO" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource HeaderLabel}"/>
+            </StackPanel>
+
+            <Button Click="OnButtonClickChangeMaterial_Event" Content="PROMENI MATERIJAL" Style="{StaticResource Button}"/>
+            <Button Click="OnButtonClickEdgeTape_Event" Content="KANTOVANJE" Style="{StaticResource Button}"/>
+            <Button Click="OnButtonClickFittings_Event" Content="DODAJ OKOV" Style="{StaticResource Button}"/>
+            <Button Click="OnButtonClickGetSpecification_Event" Content="SASTAVNICA" Style="{StaticResource Button}"/>
+        </StackPanel>
+
+        <!--<StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Command="{Binding AddIntoBaseCommand}" Content="UBACI U BAZU" Style="{StaticResource Button}"/>
+            <Button Command="{Binding GoBackCommand}" Content="NAZAD" Style="{StaticResource Button}"/>
+        </StackPanel>-->
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Click="OnButtonClickResetCommand_Event" Content="RESETUJ PODATKE" Style="{StaticResource Button}"/>
+            <Button Click="OnButtonClickInsertIntoBase_Event" IsEnabled="{Binding IsEnabledDataBase}" Grid.Column="1" Grid.Row="2" Content="UBACI U BAZU" Style="{StaticResource Button}"/>
+            <Button Command="{Binding GoBackCommand}" Grid.Column="0" Grid.Row="2" Content="NAZAD" Style="{StaticResource Button}"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" Grid.Column="1" VerticalAlignment="Top">
+            <TextBlock Text="{Binding Specification}" Margin="5" Background="LightGray" TextWrapping="Wrap"/>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

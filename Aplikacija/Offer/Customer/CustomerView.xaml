@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="Aplikacija.Offer.Customer.CustomerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aplikacija.Offer.Customer"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+            <Label Content="ODABERI KUPCA ILI NAPRAVI NOVOG" Style="{StaticResource HeaderLabel}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel>
+                <Label Content="ODABERI KUPCA" Style="{StaticResource HeaderLabel}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton Command="{Binding LoadAllCivilCustomersCommand}" Content="Fizicka lica" VerticalContentAlignment="Center" FontSize="20"/>
+                <Label Content="            "/>
+                <RadioButton Command="{Binding LoadAllPublicCustomersCommand}" Content="Pravna lica" VerticalContentAlignment="Center" FontSize="20"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Nadji kupca:" Style="{StaticResource BasicLabel}"/>
+                <TextBox Style="{StaticResource InputTextBox}" Width="350" IsEnabled="{Binding SearchCustomer}" Margin="15,0,0,0"/>
+                <Button Content="Pretrazi" Style="{StaticResource Button}" Margin="15,0,0,0"/>
+
+            </StackPanel>
+
+            <ListView Margin="5" ItemsSource="{Binding AllCustomers}" SelectedItem="{Binding SelectedCivilCustomer}" Visibility="{Binding LoadAllCivil, Converter={StaticResource VisibilityConverter}}"
+                      ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False"
+                      Height="140">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Kupci">
+                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="30"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="Ime" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Prezime" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Adresa" Width="80"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding IDnumber}" Header="Maticni broj" Width="110"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <ListView Margin="5" ItemsSource="{Binding AllCustomers}" SelectedItem="{Binding SelectedPublicCustomer}" Visibility="{Binding LoadAllPublic, Converter={StaticResource VisibilityConverter}}"
+                      ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False"
+                      Height="140">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Kupci">
+                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="30"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Naziv firme" Width="90"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyAddress}" Header="Adresa" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PIB}" Header="PIB" Width="80"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CompanyIDnumber}" Header="Maticni broj" Width="110"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <StackPanel HorizontalAlignment="Center">
+                <Label Content="UBACI NOVOG KUPCA" Style="{StaticResource HeaderLabel}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton Command="{Binding CivilVisibilityCommand}" Content="Fizicko lice" VerticalContentAlignment="Center" IsChecked="{Binding VisibilityCivilCustomerCreate}" FontSize="20"/>
+                <Label Content="            "/>
+                <RadioButton Command="{Binding PublicVisibilityCommand}" Content="Pravno lice" VerticalContentAlignment="Center" IsChecked="{Binding VisibilityPublicCustomerCreate}" FontSize="20"/>
+            </StackPanel>
+
+            <Grid Margin="5" Visibility="{Binding VisibilityCustomerCivil, Converter={StaticResource VisibilityConverter}}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="ID:" Style="{StaticResource BasicLabel}"/>
+                <Label Content="{Binding ID}" Grid.Column="1" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center"/>
+
+                <Label Content="Ime:" Style="{StaticResource BasicLabel}" Grid.Row="1"/>
+                <Label Content="Prezime:" Style="{StaticResource BasicLabel}" Grid.Row="2"/>
+                <Label Content="Adresa:" Style="{StaticResource BasicLabel}" Grid.Row="3"/>
+                <Label Content="Maticni broj:" Style="{StaticResource BasicLabel}" Grid.Row="4"/>
+
+                <TextBox Text="{Binding FirstName}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="1"/>
+                <TextBox Text="{Binding LastName}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="2"/>
+                <TextBox Text="{Binding Address}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="3"/>
+                <TextBox Text="{Binding IDnumber}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="4"/>
+
+
+            </Grid>
+
+            <Grid Margin="5" Visibility="{Binding VisibilityCustomerCompany, Converter={StaticResource VisibilityConverter}}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="ID:" Style="{StaticResource BasicLabel}"/>
+                <Label Content="{Binding ID}" Grid.Column="1" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center"/>
+
+                <Label Content="Ime firme:" Style="{StaticResource BasicLabel}" Grid.Row="1"/>
+                <Label Content="Adresa:" Style="{StaticResource BasicLabel}" Grid.Row="2"/>
+                <Label Content="PIB:" Style="{StaticResource BasicLabel}" Grid.Row="3"/>
+                <Label Content="Maticni broj:" Style="{StaticResource BasicLabel}" Grid.Row="4"/>
+
+                <TextBox Text="{Binding CompanyName}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="1"/>
+                <TextBox Text="{Binding CompanyAddress}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="2"/>
+                <TextBox Text="{Binding PIB}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="3"/>
+                <TextBox Text="{Binding CompanyIDnumber}" Style="{StaticResource InputTextBox}" Grid.Column="1" Grid.Row="4"/>
+            </Grid>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+            <Button Command="{Binding CreateCivilCustomerCommand}" Content="KREIRAJ KUPCA" Style="{StaticResource Button}" Grid.Row="3" Visibility="Hidden"/>
+            <Button Click="OnCreateCustomerClick_Event" Content="KREIRAJ KUPCA" Style="{StaticResource Button}" IsEnabled="{Binding Create}" Grid.Row="5" Grid.ColumnSpan="2"/>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="3">
+            <Button Click="OnCreateOfferButtonClick_Event" Content="DALJE" Style="{StaticResource Button}" IsEnabled="{Binding IsSelected}"/>
+            <Button Command="{Binding GoBackCommand}" Content="NAZAD" Style="{StaticResource Button}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
