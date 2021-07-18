@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseBroker", "DataBaseB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6679F703-2C34-4192-8840-0B3FC478346A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainEntity", "DomainEntity\DomainEntity.csproj", "{F26F2C41-557E-4671-8903-135EE56A4259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseBrokerEntity", "DataBaseBrokerEntity\DataBaseBrokerEntity.csproj", "{57BCE4A3-A288-4153-81EC-57912F8D310B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{6679F703-2C34-4192-8840-0B3FC478346A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6679F703-2C34-4192-8840-0B3FC478346A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6679F703-2C34-4192-8840-0B3FC478346A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26F2C41-557E-4671-8903-135EE56A4259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26F2C41-557E-4671-8903-135EE56A4259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26F2C41-557E-4671-8903-135EE56A4259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26F2C41-557E-4671-8903-135EE56A4259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BCE4A3-A288-4153-81EC-57912F8D310B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BCE4A3-A288-4153-81EC-57912F8D310B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BCE4A3-A288-4153-81EC-57912F8D310B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BCE4A3-A288-4153-81EC-57912F8D310B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

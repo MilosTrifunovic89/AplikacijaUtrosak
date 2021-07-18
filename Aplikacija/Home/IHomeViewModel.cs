@@ -1,5 +1,6 @@
 ﻿using Aplikacija.Base.ViewModel;
 using Domain;
+using DomainEntity;
 using System;
 
 namespace Aplikacija.Home
